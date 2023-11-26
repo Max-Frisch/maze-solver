@@ -6,12 +6,16 @@ def main():
     win = Window(800, 600)
 
     # draw some cells
-    cell = Cell(Point(50,50), Point(100,100), win)
-    cell.draw()
-    cell = Cell(Point(125,125), Point(200,200), win)
-    cell.draw()
-    cell = Cell(Point(300,300), Point(500,500), win)
-    cell.draw()
+    cell1 = Cell(Point(50,50), Point(100,100), win)
+    # cell1.has_right_wall = False
+    cell1.draw()
+    cell2 = Cell(Point(100,50), Point(150,100), win)
+    cell2.has_left_wall = False
+    cell2.draw()
+
+    # draw move from cell1 to cell2
+    cell1.draw_move(cell2)
+
 
     # run/mainloop
     win.wait_for_close()

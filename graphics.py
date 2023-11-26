@@ -21,7 +21,7 @@ class Line():
 class Window():
     def __init__(self, width: int, height: int) -> None:
         self.__root = Tk()
-        self.__root.title = 'Maze Solver'
+        self.__root.title('Maze Solver')
         self.__root.protocol('WM_DELETE_WINDOW', self.close)
         self._canvas = Canvas(
             self.__root,

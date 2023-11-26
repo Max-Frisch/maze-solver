@@ -22,7 +22,7 @@ class Cell():
                 Point(self._x1, self._y1),
                 Point(self._x1, self._y2)
             ),
-            "black" if self.has_right_wall else "white"
+            "black" if self.has_left_wall else "white"
         )
 
         # draw right wall
@@ -40,7 +40,7 @@ class Cell():
                 Point(self._x1, self._y1),
                 Point(self._x2, self._y1)
             ),
-            "black" if self.has_right_wall else "white"
+            "black" if self.has_top_wall else "white"
         )
 
         # draw bottom wall
@@ -49,5 +49,18 @@ class Cell():
                 Point(self._x1, self._y2),
                 Point(self._x2, self._y2)
             ),
-            "black" if self.has_right_wall else "white"
+            "black" if self.has_bottom_wall else "white"
         )
+
+    # draw the maze-solving line from center of cell to center of to_cell
+
+    # moving right
+    def draw_move(self, to_cell, undo: bool = False) -> None:
+        self._win.draw_line(
+            Line(
+                Point((self._x1 + self._x2) // 2, (self._y1 + self._y2) // 2), # 50, 50   100, 50 -> 75,75
+                Point((to_cell._x1 + to_cell._x2) // 2, (to_cell._y1 + to_cell._y2) // 2) # 100, 100  150, 100 -> 125,75
+            ),
+            "gray" if undo else "red"
+        )
+    #TODO moving left, up, down
