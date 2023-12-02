@@ -3,15 +3,16 @@ from typing import Optional
 
 class Cell():
     def __init__(self, top_left: Point, bottom_right: Point, win: Optional[Window] = None):
-        self.has_left_wall = True
-        self.has_right_wall = True
-        self.has_top_wall = True
-        self.has_bottom_wall = True
-        self._x1 = top_left.x
-        self._y1 = top_left.y
-        self._x2 = bottom_right.x
-        self._y2 = bottom_right.y
-        self._win = win
+        self.has_left_wall: bool = True
+        self.has_right_wall: bool = True
+        self.has_top_wall: bool = True
+        self.has_bottom_wall: bool = True
+        self._x1: int = top_left.x
+        self._y1: int = top_left.y
+        self._x2: int = bottom_right.x
+        self._y2: int = bottom_right.y
+        self._win: Window = win
+        self.visited: bool = False
 
     def draw(self) -> None:
         if self._win is None:
