@@ -29,6 +29,7 @@ class Maze():
         self._create_cells()
         self._break_entrance_and_exit()
         self._break_walls_r(0, 0)
+        self._reset_cells_visited()
 
     def _create_cells(self) -> None:
         self._cells = []
@@ -113,3 +114,38 @@ class Maze():
                 next_cell.has_top_wall = False
             self._break_walls_r(next_loc.x, next_loc.y)
 
+    def _reset_cells_visited(self):
+        for col in self._cells:
+            for cell in col:
+                cell.visited = False
+
+    def solve(self) -> bool:
+        return self._solve_r(0, 0)
+    
+    def _solve_r(self, x: int, y: int) -> bool:
+        self._animate(0.08)
+        actual_cell = self._cells[x][y]
+        actual_cell.visited = True
+        if x == self._num_cols - 1 and y == self._num_rows - 1:
+            return True
+        
+        possible_directions = self._get_possible_directions(x, y)
+        for direction in possible_directions:
+            next_cell = self._cells[direction.x][direction.y]
+            # move left
+            if direction.x < x and (actual_cell.has_left_wall or next_cell.has_right_wall):
+                continue
+            # move right
+            if direction.x > x and (actual_cell.has_right_wall or next_cell.has_left_wall):
+                continue
+            # move up
+            if direction.y < y and (actual_cell.has_top_wall or next_cell.has_bottom_wall):
+                continue
+            # move down
+            if direction.y > y and (actual_cell.has_bottom_wall or next_cell.has_top_wall):
+                continue
+            actual_cell.draw_move(next_cell)
+            if self._solve_r(direction.x, direction.y):
+                return True
+            actual_cell.draw_move(next_cell, undo = True)
+        return False
