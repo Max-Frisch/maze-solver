@@ -1,7 +1,8 @@
 from graphics import *
+from typing import Optional
 
 class Cell():
-    def __init__(self, top_left: Point, bottom_right: Point, win: Window):
+    def __init__(self, top_left: Point, bottom_right: Point, win: Optional[Window] = None):
         self.has_left_wall = True
         self.has_right_wall = True
         self.has_top_wall = True
@@ -63,4 +64,3 @@ class Cell():
             ),
             "gray" if undo else "red"
         )
-        

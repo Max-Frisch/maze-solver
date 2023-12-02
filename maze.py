@@ -1,6 +1,7 @@
 from cell import Cell
 from graphics import Point, Window
 import time
+from typing import Optional
 
 class Maze():
     def __init__(
@@ -11,7 +12,7 @@ class Maze():
             num_cols: int,
             cell_size_x: int,
             cell_size_y: int, 
-            win,
+            win: Optional[Window] = None,
         ):
         self._x1 = x1
         self._y1 = y1
@@ -22,6 +23,7 @@ class Maze():
         self._window = win
 
         self._create_cells()
+        self._break_entrance_and_exit()
 
     def _create_cells(self) -> None:
         self._cells = []
@@ -50,5 +52,18 @@ class Maze():
         self._animate()
     
     def _animate(self) -> None:
+        if self._window is None:
+            return
         self._window.redraw()
         time.sleep(0.015)
+
+    def _break_entrance_and_exit(self):
+        entrance_cell = self._cells[0][0]
+        entrance_cell.has_top_wall = False
+        entrance_cell.draw()
+        
+        exit_cell = self._cells[self._num_cols - 1][self._num_rows - 1]
+        exit_cell.has_bottom_wall = False
+        exit_cell.draw()
+
+        
