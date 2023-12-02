@@ -52,9 +52,7 @@ class Cell():
             "black" if self.has_bottom_wall else "white"
         )
 
-    # draw the maze-solving line from center of cell to center of to_cell
-
-    # moving right
+    # draw the maze-solving line from center of cell to center of the next cell
     def draw_move(self, to_cell, undo: bool = False) -> None:
         if self._win is None:
             return
@@ -65,4 +63,4 @@ class Cell():
             ),
             "gray" if undo else "red"
         )
-    #TODO moving left, up, down
+        
