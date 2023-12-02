@@ -1,4 +1,4 @@
-from tkinter import Tk, BOTH, Canvas
+from tkinter import Tk, BOTH, Canvas, PhotoImage
 
 
 class Point():
@@ -31,6 +31,7 @@ class Window():
         )
         self._canvas.pack(fill=BOTH, expand=1)
         self._is_running = False
+     
 
     def redraw(self) -> None:
         self.__root.update_idletasks()

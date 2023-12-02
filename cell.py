@@ -56,6 +56,8 @@ class Cell():
 
     # moving right
     def draw_move(self, to_cell, undo: bool = False) -> None:
+        if self._win is None:
+            return
         self._win.draw_line(
             Line(
                 Point((self._x1 + self._x2) // 2, (self._y1 + self._y2) // 2), # 50, 50   100, 50 -> 75,75
